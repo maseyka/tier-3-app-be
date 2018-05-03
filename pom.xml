@@ -5,7 +5,7 @@
 
     <groupId>org.springframework.samples</groupId>
     <artifactId>spring-petclinic-reactjs</artifactId>
-    <version>1.4.0</version>
+    <version>0.0.1-SNAPSHOT</version>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -118,19 +118,6 @@
         </dependency>
     </dependencies>
 
-
-    <distributionManagement>
-        <repository>
-            <id>storage</id>
-            <name>Releases</name>
-            <url>http://nexus:8081/repository/maven-releases</url>
-        </repository>
-        <snapshotRepository>
-            <id>storage</id>
-            <name>Snapshots</name>
-            <url>http://nexus:8081/repository/maven-snapshots</url>
-        </snapshotRepository>
-    </distributionManagement>
     <!-- Maven plugin versions are mentioned in order to guarantee the build reproducibility in the long term -->
     <build>
         <finalName>petclinic</finalName>
@@ -194,32 +181,6 @@
                 <version>3.5.3</version>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-eclipse-plugin</artifactId>
-                <version>2.9</version>
-                <configuration>
-                    <downloadSources>true</downloadSources>
-                    <downloadJavadocs>true</downloadJavadocs>
-                    <wtpversion>2.0</wtpversion>
-                    <sourceIncludes>
-                        <sourceInclude>**/*.*</sourceInclude>
-                    </sourceIncludes>
-                    <additionalBuildcommands>
-                        <buildCommand>
-                            <name>org.springframework.ide.eclipse.core.springbuilder</name>
-                        </buildCommand>
-                        <buildCommand>
-                            <name>org.eclipse.m2e.core.maven2Builder</name>
-                        </buildCommand>
-                    </additionalBuildcommands>
-                    <additionalProjectnatures>
-                        <projectnature>org.eclipse.jdt.core.javanature</projectnature>
-                        <projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
-                        <projectnature>org.eclipse.m2e.core.maven2Nature</projectnature>
-                    </additionalProjectnatures>
-                </configuration>
-            </plugin>
-            <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
                 <version>0.4.11</version>
@@ -244,38 +205,7 @@
 
         </plugins>
         <pluginManagement>
-        	<plugins>
-        		<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
-        		<plugin>
-        			<groupId>org.eclipse.m2e</groupId>
-        			<artifactId>lifecycle-mapping</artifactId>
-        			<version>1.0.0</version>
-        			<configuration>
-        				<lifecycleMappingMetadata>
-        					<pluginExecutions>
-        						<pluginExecution>
-        							<pluginExecutionFilter>
-        								<groupId>
-        									org.springframework.boot
-        								</groupId>
-        								<artifactId>
-        									spring-boot-maven-plugin
-        								</artifactId>
-        								<versionRange>
-        									[1.4.0.RELEASE,)
-        								</versionRange>
-        								<goals>
-        									<goal>build-info</goal>
-        								</goals>
-        							</pluginExecutionFilter>
-        							<action>
-        								<ignore></ignore>
-        							</action>
-        						</pluginExecution>
-        					</pluginExecutions>
-        				</lifecycleMappingMetadata>
-        			</configuration>
-        		</plugin>
+            <plugins>
                 <plugin>
                     <groupId>org.sonatype.plugins</groupId>
                     <artifactId>nexus-staging-maven-plugin</artifactId>
@@ -295,7 +225,7 @@
                         <skipStaging>true</skipStaging>
                     </configuration>
                 </plugin>
-        	</plugins>
+            </plugins>
         </pluginManagement>
     </build>
     <reporting>
@@ -315,50 +245,4 @@
         </plugins>
     </reporting>
 
-    <profiles>
-        <profile>
-            <id>local</id>
-            <properties>
-                <spring.profiles.active>local</spring.profiles.active>
-                <database.driverClassName>org.hsqldb.jdbc.JDBCDriver</database.driverClassName>
-                <database.url>jdbc:hsqldb:mem://localhost/petclinic?createDatabaseIfNotExist=true</database.url>
-                <database.user>root</database.user>
-                <database.password>admin</database.password>
-            </properties>
-            <dependencies>
-                <dependency>
-                    <groupId>org.hsqldb</groupId>
-                    <artifactId>hsqldb</artifactId>
-                    <version>2.4.0</version>
-                    <scope>runtime</scope>
-                </dependency>
-                <dependency>
-                    <groupId>com.h2database</groupId>
-                    <artifactId>h2</artifactId>
-                    <version>1.4.196</version>
-                </dependency>
-            </dependencies>
-        </profile>
-        <profile>
-            <id>prod</id>
-            <properties>
-                <spring.profiles.active>prod</spring.profiles.active>
-                <database.driverClassName>org.postgresql.Driver</database.driverClassName>
-                <database.url>jdbc:postgresql://localhost:5432/petclinic?createDatabaseIfNotExist=true</database.url>
-                <database.user>postgres</database.user>
-                <database.password>root</database.password>
-            </properties>
-            <dependencies>
-                <dependency>
-                    <groupId>org.postgresql</groupId>
-                    <artifactId>postgresql</artifactId>
-                    <version>9.4.1212</version>
-                    <scope>runtime</scope>
-                </dependency>
-            </dependencies>
-        </profile>
-    </profiles>
-
-
-    <url>demopetclinic</url>
 </project>
