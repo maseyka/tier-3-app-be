@@ -49,33 +49,23 @@ public class Vet extends Person {
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "vet_specialties", joinColumns = @JoinColumn(name = "vet_id"),
         inverseJoinColumns = @JoinColumn(name = "specialty_id"))
-    private Set<Specialty> specialties;
+    private Set<Specialty> specialties = new HashSet<>();
 
-    protected Set<Specialty> getSpecialtiesInternal() {
-        if (this.specialties == null) {
-            this.specialties = new HashSet<>();
-        }
-        return this.specialties;
-    }
-
-    protected void setSpecialtiesInternal(Set<Specialty> specialties) {
-        this.specialties = specialties;
-    }
 
     @XmlElement
     public List<Specialty> getSpecialties() {
-        List<Specialty> sortedSpecs = new ArrayList<>(getSpecialtiesInternal());
+        List<Specialty> sortedSpecs = new ArrayList<>();
         PropertyComparator.sort(sortedSpecs, new MutableSortDefinition("name", true, true));
         return Collections.unmodifiableList(sortedSpecs);
     }
 
     @JsonIgnore
     public int getNrOfSpecialties() {
-        return getSpecialtiesInternal().size();
+        return this.specialties.size();
     }
 
     public void addSpecialty(Specialty specialty) {
-        getSpecialtiesInternal().add(specialty);
+        this.specialties.add(specialty);
     }
 
 }

@@ -15,7 +15,7 @@ public class PetRequest {
 	@Size(min = 1)
 	private String		name;
 	@Min(1)
-	Integer						typeId;
+	private Integer						typeId;
 
 	public LocalDate getBirthDate() {
 		return birthDate;
