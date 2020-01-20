@@ -1,0 +1,23 @@
+name: tier-3-app-be
+namespace: ""
+cdPipelineName: ""
+cdPipelineStageName: ""
+dnsWildcard: eks-delivery.aws.main.edp.projects.epam.com
+
+
+database:
+  required: true
+  version: postgres:9.6
+  storageClass: gp2
+  capacity: 1Gi
+
+
+
+ingress:
+  required: true
+  site: petclinic
+  path: /api
+
+image:
+  name: tier-3-app-be
+  version: latest
